@@ -8,7 +8,14 @@ issues or problems around automation, and exposure of custom kernels to users, p
 For questions regarding individual kernels, their current version, and updates, please contact the individual listed in 
 the kernel description documentation.
 
+### Workflow
 
+1. Create a subdirectory for your kernel within the [kernels directory](./Kernels/)
+2. create an 'update.sh' file that contains all of the needed commands to build and install your kernel as a custom ipy kernel
+3. if your project has git submodules; create a 'tags.json' file which identifies the repositories and their branch/version leveraged by the custom kernel
+4. include necessary git automation to checkout the appropriate branches/commits for each of the git submodules
+5. create an entry in the kernel listing in the main [readme](./README.md)
+ 
 ### Kernel organization
 Each custom kernel should be contained with a directory under ./Kernels/ and should have a short but descriptive name 
 relevant to individuals outside of the project. Ideally, these custom kernels are maintained through a CI pipeline and will not require manual updates.

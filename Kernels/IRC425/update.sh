@@ -4,7 +4,7 @@
 
 # requiring the kernel name to also be the directory name as well as in the tags isn't the most robust method
 custom_kernel="IRC425"
-custom_kernel_path="./Kernels/"$custom_kernel
+custom_kernel_path="./Kernels/" $custom_kernel "/"
 
 sed -i~ -e '/^## Current Release/,$d' README.md
 echo "## Current Release" >> README.md
@@ -16,7 +16,7 @@ echo "| ------ | ------- |" >> README.md
 
 # TODO: this will update all submodules in the repo - not just for this custom kernel
 git submodule update --remote
-for dir in $(jq -r 'keys[]' $custom_kernel_path"/"tags.json | sort); do
+for dir in $(jq -r 'keys[]' custom_kernel_path"/"tags.json | sort); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
   tag=$(jq -r ".\"$dir\"" tags.json)
   if [ "$tag" == "null" ]; then
