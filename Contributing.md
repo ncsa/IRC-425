@@ -16,6 +16,9 @@ relevant to individuals outside of the project. Ideally, these custom kernels ar
 Prior to pull requests integrating new custom kernels into the overall list of maintained kernels, the listing in the 
 main readme should be expanded with the required information, as tabulated below.
 
+### Kernel Update
+
+
 
 ### Template Kernel Definition (Use me for your next kernel!)
 | Field        | Value                                       |
