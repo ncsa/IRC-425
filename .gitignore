@@ -1,0 +1,6 @@
+/local/
+/Documents/
+/venv/
+/.idea
+*.log
+*/.Rhistory
