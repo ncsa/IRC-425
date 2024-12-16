@@ -1,8 +1,8 @@
 {
   "IRC425": "v0.0.0",
   "yggdrasil": "1.7.0",
-  "BioCroSoybean": "v4.14.0",
-  "ePhotosynthesis": "1.32.1",
+  "Soybean-BioCro": "v4.14.0",
+  "ePhotosynthesis_C": "1.32.1",
   "jupyter-nodeeditor": "v1.9.1",
   "raytracer": "v1.27.1"
 }
