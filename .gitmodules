@@ -7,9 +7,6 @@
 [submodule "Kernels/IRC425/jupyterlab_nodeeditor"]
 	path = Kernels/IRC425/jupyterlab_nodeeditor
 	url = https://github.com/cropsinsilico/jupyterlab_nodeeditor
-[submodule "Kernels/IRC425/EvoEngine"]
-	path = Kernels/IRC425/EvoEngine
-	url = https://github.com/edisonlee0212/EvoEngine
 [submodule "Kernels/IRC425/ePhotosynthesis_C"]
 	path = Kernels/IRC425/ePhotosynthesis_C
 	url = https://github.com/cropsinsilico/ePhotosynthesis_C

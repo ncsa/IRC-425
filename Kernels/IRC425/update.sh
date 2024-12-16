@@ -15,24 +15,28 @@ json_tags="$custom_kernel_path""tags.json"
 #echo "| ------ | ------- |" >> README.md
 
 # TODO: this will update all submodules in the repo - not just for this custom kernel
-git submodule update --remote
+# git submodule update --remote
 #for dir in $(jq -r 'keys[]' $custom_kernel_path"/"tags.json | sort); do
 for dir in $(jq -r 'keys[]' $json_tags | sort); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
-  #tag=$(jq -r ".\"$dir\"" tags.json)
   tag=$(jq -r ".\"$dir\"" $json_tags)
+  target_dir=$custom_kernel_path""$dir
+  git submodule update --init $target_dir
   if [ "$tag" == "null" ]; then
+    # TODO: Handle: this tag isn't applicable except for this kernel
     echo "[$dir] missing tag"
   else
-    if [ ! -d $dir ]; then
+    if [ ! -d $target_dir ]; then
       echo "[$dir] missing submodule"
+#      TODO: ideally, adding a tag will automatically cause the submodule to be added
+#      TODO: However, without a structured URL, this may not be as direct
 #      git submodule add https://github.com/IN-CORE/$dir $dir
     fi
     echo "[$dir] checking out $tag"
 #    sed -i~ "s/^| $dir | .* |$/| $dir | $tag |/" README.md
 #    rm README.md~
-#    (cd $dir; git checkout $tag)
-#    git add $dir
+    (cd $target_dir; git checkout $tag)
+    git add $target_dir
   fi
   echo "| ${dir} | ${tag} |"
 #  echo "| ${dir} | ${tag} |" >> README.md
