@@ -3,6 +3,7 @@
 # shamelessly lifted from INCORE: https://github.com/IN-CORE/IN-CORE/blob/main/update.sh
 
 # requiring the kernel name to also be the directory name as well as in the tags isn't the most robust method
+#TODO: need to either put these in a config or environment vars - pasting at top of every sh is crap
 custom_kernel="IRC425"
 custom_kernel_path="./Kernels/$custom_kernel/"
 json_tags="$custom_kernel_path""tags.json"
@@ -14,23 +15,22 @@ json_tags="$custom_kernel_path""tags.json"
 #echo "| module | version |" >> README.md
 #echo "| ------ | ------- |" >> README.md
 
-# TODO: this will update all submodules in the repo - not just for this custom kernel
-# git submodule update --remote
-#for dir in $(jq -r 'keys[]' $custom_kernel_path"/"tags.json | sort); do
+source $custom_kernel_path"/kernel_prepare.sh"
+
 for dir in $(jq -r 'keys[]' $json_tags | sort); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
-  tag=$(jq -r ".\"$dir\"" $json_tags)
+  tag=$(jq -r ".\"$dir\".tag" $json_tags)
+  url=$(jq -r ".\"$dir\".url" $json_tags)
+  install_script=$(jq -r ".\"$dir\".install" $json_tags)
   target_dir=$custom_kernel_path""$dir
-  git submodule update --init $target_dir
+
+  # submodule handling: add or checkout correct tag
   if [ "$tag" == "null" ]; then
-    # TODO: Handle: this tag isn't applicable except for this kernel
     echo "[$dir] missing tag"
   else
     if [ ! -d $target_dir ]; then
       echo "[$dir] missing submodule"
-#      TODO: ideally, adding a tag will automatically cause the submodule to be added
-#      TODO: However, without a structured URL, this may not be as direct
-#      git submodule add https://github.com/IN-CORE/$dir $dir
+      git submodule add $url $target_dir
     fi
     echo "[$dir] checking out $tag"
 #    sed -i~ "s/^| $dir | .* |$/| $dir | $tag |/" README.md
@@ -42,6 +42,10 @@ for dir in $(jq -r 'keys[]' $json_tags | sort); do
 #  echo "| ${dir} | ${tag} |" >> README.md
 done
 
-#git add README.md tags.json
-#git submodule status
-#git status
+echo "triggering install processes"
+source $custom_kernel_path"kernel_install.sh"
+echo "done with installs"
+
+echo "starting ipykernel installation"
+python -m ipykernel install --user --name CustomKernel01 --display-name="CustomKernel01"
+jupyter kernelspec list

@@ -1,7 +1,27 @@
 {
-  "IRC425": "v0.0.0",
-  "yggdrasil": "main",
-  "Soybean-BioCro": "main",
-  "ePhotosynthesis_C": "SoybeanParameterization",
-  "jupyterlab_nodeeditor": "main"
+  "IRC425": {
+    "tag": "v0.0.0",
+    "url": "https://github.com/ncsa/IRC-425",
+    "install": "none"
+  },
+  "yggdrasil": {
+    "tag": "main",
+    "url": "https://github.com/cropsinsilico/yggdrasil",
+    "install": "none"
+  },
+  "Soybean-BioCro": {
+    "tag": "main",
+    "url": "https://github.com/cropsinsilico/Soybean-BioCro",
+    "install": "none"
+  },
+  "ePhotosynthesis_C": {
+    "tag": "SoybeanParameterization",
+    "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
+    "install": "ePhotosynthesis.sh"
+  },
+  "jupyterlab_nodeeditor": {
+    "tag": "main",
+    "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
+    "install": "none"
+  }
 }
