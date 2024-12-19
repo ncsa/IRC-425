@@ -17,6 +17,8 @@ json_tags="$custom_kernel_path""tags.json"
 
 source $custom_kernel_path"/kernel_prepare.sh"
 
+git submodule update --init
+
 for dir in $(jq -r 'keys[]' $json_tags | sort); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)

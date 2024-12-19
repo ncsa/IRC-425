@@ -10,9 +10,6 @@ echo "installing ePhotosynthesis_C"
 cd $custom_kernel_path/"ePhotosynthesis_C"
 conda install -y boost
 conda install -y 'sundials<=5.7.0'
-conda install -y cmake
-conda install -y make
-conda install -y cxx-compiler
 mkdir Build
 
 cd Build
@@ -26,7 +23,3 @@ echo "Done."
 # really.
 cd ../../../../
 # ePhotosynthesis_C done
-################################
-
-
-# Jupyter Install

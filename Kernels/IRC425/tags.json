@@ -7,12 +7,12 @@
   "yggdrasil": {
     "tag": "main",
     "url": "https://github.com/cropsinsilico/yggdrasil",
-    "install": "none"
+    "install": "yggdrasil.sh"
   },
   "Soybean-BioCro": {
     "tag": "main",
     "url": "https://github.com/cropsinsilico/Soybean-BioCro",
-    "install": "none"
+    "install": "soybean-biocro.sh"
   },
   "ePhotosynthesis_C": {
     "tag": "SoybeanParameterization",
