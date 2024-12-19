@@ -11,7 +11,7 @@ echo "Starting kernel preparation"
 echo "preparing conda environment"
 conda config --add channels conda-forge
 
-conda create -y --prefix target_conda_environment_location python=3.11
+conda create -y --prefix $target_conda_environment_location python=3.11
 echo "created conda environment: "$custom_kernel
 eval $(conda shell.bash hook)
 if conda activate $custom_kernel
