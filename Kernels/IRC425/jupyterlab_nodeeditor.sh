@@ -10,8 +10,7 @@ iam="jupyterlab_nodeeditor"
 
 echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 git submodule update --init --recursive
 conda install -y -c conda-forge jupyterlab
 conda install -y ipywidgets
@@ -25,6 +24,5 @@ jlpm build
 echo "Done."
 # really.
 cd ../../../
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 # yggdrasil done

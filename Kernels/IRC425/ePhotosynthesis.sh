@@ -10,8 +10,7 @@ target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
 
 echo "installing ePhotosynthesis_C"
 cd $custom_kernel_path"/ePhotosynthesis_C" || return
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 git submodule update --init --recursive
 conda install -y -c conda-forge 'sundials<=5.7.0'
 conda install -y boost
@@ -19,8 +18,7 @@ conda install -y 'cmake>=3.10'
 conda install -y cxx-compiler
 mkdir Build || return
 
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 cd Build || return
 echo 'cmake call'
 cmake ../ || return
@@ -30,7 +28,6 @@ echo 'make install'
 make DESTDIR="$CONDA_PREFIX"/lib install
 echo "Done."
 # really.
-echo "moving to: "
 cd ../../../../
-pwd
+echo "current dir: ${PWD}"
 # ePhotosynthesis_C done

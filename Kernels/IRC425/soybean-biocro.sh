@@ -10,8 +10,7 @@ iam="Soybean-BioCro"
 
 echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 echo "resolving git submodules for "$iam
 git submodule update --init --recursive
 echo "Installing R and deps for "$iam
@@ -22,6 +21,5 @@ R CMD INSTALL biocro || return
 echo "Done."
 # really.
 cd ../../../
-echo "now in: "
-pwd
+echo "current dir: ${PWD}"
 # yggdrasil done
