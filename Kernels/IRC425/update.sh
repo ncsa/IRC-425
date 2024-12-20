@@ -31,9 +31,9 @@ for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
     if [ ! -d $target_dir ]; then
       echo "[$dir] missing submodule"
       git submodule add $url $target_dir
-      git submodule update --init --recursive $target_dir
 #      git submodule update --init --recursive
     fi
+    git submodule update --init --recursive $target_dir
     echo "[$dir] checking out $tag"
     echo "current dir: ${PWD}"
     echo "moving to: "$target_dir
