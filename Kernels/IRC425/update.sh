@@ -17,8 +17,6 @@ json_tags="$custom_kernel_path""tags.json"
 
 source $custom_kernel_path"/kernel_prepare.sh"
 
-git submodule update --init --recursive
-
 for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)
@@ -33,16 +31,14 @@ for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
     if [ ! -d $target_dir ]; then
       echo "[$dir] missing submodule"
       git submodule add $url $target_dir
-      git submodule update --init --recursive
+#      git submodule update --init --recursive
     fi
     echo "[$dir] checking out $tag"
-#    sed -i~ "s/^| $dir | .* |$/| $dir | $tag |/" README.md
-#    rm README.md~
+    (cd $target_dir; git checkout $tag) || return
     echo "moving to: "
     pwd
-    (cd $target_dir; git checkout $tag)
     git add $target_dir
-    cd ../../../
+    cd ../../
     echo "moving to: "
     pwd
   fi

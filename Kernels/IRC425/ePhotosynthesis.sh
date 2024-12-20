@@ -10,6 +10,9 @@ target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
 
 echo "installing ePhotosynthesis_C"
 cd $custom_kernel_path"/ePhotosynthesis_C" || return
+echo "now in: "
+pwd
+git submodule update --init --recursive
 conda install -y -c conda-forge 'sundials<=5.7.0'
 conda install -y boost
 conda install -y 'cmake>=3.10'

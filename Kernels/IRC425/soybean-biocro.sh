@@ -13,8 +13,7 @@ cd $custom_kernel_path"/"$iam || return
 echo "now in: "
 pwd
 echo "resolving git submodules for "$iam
-git submodule init
-git submodule update
+git submodule update --init --recursive
 echo "Installing R and deps for "$iam
 conda install -y -c r r-base=3.6.3
 conda install -y -c r r-lattice
