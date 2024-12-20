@@ -22,6 +22,6 @@
   "jupyterlab_nodeeditor": {
     "tag": "main",
     "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
-    "install": "none"
+    "install": "jupyterlab_nodeeditor.sh"
   }
 }

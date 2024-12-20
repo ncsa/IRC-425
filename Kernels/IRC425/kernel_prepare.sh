@@ -14,18 +14,18 @@ conda config --add channels conda-forge
 conda create -y --prefix $target_conda_environment_location python=3.11
 echo "created conda environment: "$custom_kernel
 eval $(conda shell.bash hook)
-if conda activate $custom_kernel
+if conda activate $target_conda_environment_location
 then
-        echo "activated "$custom_kernel
+        echo "activated "$target_conda_environment_location
 else
         echo ERROR: Could not activate conda environment.
-        exit 1
+        return
 fi
 conda install -y -c conda-forge jupyterlab
 conda install -y -c conda-forge ipywidgets
 conda install -y git
 conda install -y jq
-conda install -y r-base=3.6.1
+conda install -y -c r r-base=3.6.1
 conda install -y cmake
 conda install -y cxx-compiler
 echo "Done preparing kernel"

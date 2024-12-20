@@ -4,6 +4,8 @@ custom_kernel="IRC425"
 custom_kernel_path="./Kernels/$custom_kernel/"
 json_tags="$custom_kernel_path""tags.json"
 
+target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
+
 iam="Soybean-BioCro"
 
 echo "installing "iam
