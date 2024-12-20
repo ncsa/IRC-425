@@ -8,13 +8,13 @@ target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
 
 iam="Soybean-BioCro"
 
-echo "installing "iam
-cd $custom_kernel_path/iam
-echo "resolving git submodules for "iam
+echo "installing "$iam
+cd $custom_kernel_path"/"$iam || return
+echo "resolving git submodules for "$iam
 git submodule init
 git submodule update
-echo "running R cmd install for "iam
-R CMD INSTALL biocro
+echo "running R cmd install for "$iam
+R CMD INSTALL biocro || return
 echo "Done."
 # really.
 cd ../../../

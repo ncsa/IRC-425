@@ -8,8 +8,8 @@ target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
 
 iam="jupyterlab_nodeeditor"
 
-echo "installing "iam
-cd $custom_kernel_path/iam
+echo "installing "$iam
+cd $custom_kernel_path"/"$iam || return
 pip install -e "."
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite

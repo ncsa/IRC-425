@@ -5,22 +5,22 @@
 custom_kernel="IRC425"
 custom_kernel_path="./Kernels/$custom_kernel/"
 json_tags="$custom_kernel_path""tags.json"
-
+iam="ePhotosynthesis_C"
 target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
 
 echo "installing ePhotosynthesis_C"
-cd $custom_kernel_path/"ePhotosynthesis_C"
+cd $custom_kernel_path"/ePhotosynthesis_C" || return
 conda install -y boost
 conda install -y 'sundials<=5.7.0'
-mkdir Build
+mkdir Build || return
 
-cd Build
+cd Build || return
 echo 'cmake call'
-cmake ../
+cmake ../ || return
 echo 'first make'
-make
+make || return
 echo 'make install'
-make DESTDIR=$CONDA_PREFIX/lib install
+make DESTDIR="$CONDA_PREFIX"/lib install
 echo "Done."
 # really.
 cd ../../../../
