@@ -4,6 +4,11 @@
     "url": "https://github.com/ncsa/IRC-425",
     "install": "none"
   },
+  "ePhotosynthesis_C": {
+    "tag": "SoybeanParameterization",
+    "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
+    "install": "ePhotosynthesis.sh"
+  },
   "yggdrasil": {
     "tag": "main",
     "url": "https://github.com/cropsinsilico/yggdrasil",
@@ -13,11 +18,6 @@
     "tag": "main",
     "url": "https://github.com/cropsinsilico/Soybean-BioCro",
     "install": "soybean-biocro.sh"
-  },
-  "ePhotosynthesis_C": {
-    "tag": "SoybeanParameterization",
-    "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
-    "install": "ePhotosynthesis.sh"
   },
   "jupyterlab_nodeeditor": {
     "tag": "main",

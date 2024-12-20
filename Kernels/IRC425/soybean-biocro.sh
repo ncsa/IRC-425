@@ -10,12 +10,19 @@ iam="Soybean-BioCro"
 
 echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
+echo "now in: "
+pwd
 echo "resolving git submodules for "$iam
 git submodule init
 git submodule update
+echo "Installing R and deps for "$iam
+conda install -y -c r r-base=3.6.3
+conda install -y -c r r-lattice
 echo "running R cmd install for "$iam
 R CMD INSTALL biocro || return
 echo "Done."
 # really.
 cd ../../../
+echo "now in: "
+pwd
 # yggdrasil done

@@ -10,6 +10,10 @@ iam="jupyterlab_nodeeditor"
 
 echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
+echo "now in: "
+pwd
+conda install -y -c conda-forge jupyterlab
+conda install -y ipywidgets
 pip install -e "."
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite
@@ -20,4 +24,6 @@ jlpm build
 echo "Done."
 # really.
 cd ../../../
+echo "now in: "
+pwd
 # yggdrasil done

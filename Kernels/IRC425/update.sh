@@ -17,9 +17,9 @@ json_tags="$custom_kernel_path""tags.json"
 
 source $custom_kernel_path"/kernel_prepare.sh"
 
-git submodule update --init
+git submodule update --init --recursive
 
-for dir in $(jq -r 'keys[]' $json_tags | sort); do
+for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)
   url=$(jq -r ".\"$dir\".url" $json_tags)
@@ -33,12 +33,18 @@ for dir in $(jq -r 'keys[]' $json_tags | sort); do
     if [ ! -d $target_dir ]; then
       echo "[$dir] missing submodule"
       git submodule add $url $target_dir
+      git submodule update --init --recursive
     fi
     echo "[$dir] checking out $tag"
 #    sed -i~ "s/^| $dir | .* |$/| $dir | $tag |/" README.md
 #    rm README.md~
+    echo "moving to: "
+    pwd
     (cd $target_dir; git checkout $tag)
     git add $target_dir
+    cd ../../../
+    echo "moving to: "
+    pwd
   fi
   echo "| ${dir} | ${tag} |"
 #  echo "| ${dir} | ${tag} |" >> README.md
@@ -48,6 +54,6 @@ echo "triggering install processes"
 source $custom_kernel_path"kernel_install.sh"
 echo "done with installs"
 
-echo "starting ipykernel installation"
-python -m ipykernel install --user --name CustomKernel01 --display-name="CustomKernel01"
-jupyter kernelspec list
+#echo "starting ipykernel installation"
+#python -m ipykernel install --user --name CustomKernel01 --display-name="CustomKernel01"
+#jupyter kernelspec list

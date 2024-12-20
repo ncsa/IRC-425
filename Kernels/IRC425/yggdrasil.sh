@@ -10,12 +10,15 @@ iam="yggdrasil"
 
 echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
+echo "now in: "
+pwd
 echo "resolving git submodules for "$iam
-git submodule init
-git submodule update
+git submodule update --init --recursive
 echo "running pip install for "$iam
 pip install . || return
 echo "Done."
 # really.
 cd ../../../
+echo "now in: "
+pwd
 # yggdrasil done

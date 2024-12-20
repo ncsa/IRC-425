@@ -21,11 +21,6 @@ else
         echo ERROR: Could not activate conda environment.
         return
 fi
-conda install -y -c conda-forge jupyterlab
-conda install -y -c conda-forge ipywidgets
-conda install -y git
-conda install -y jq
-conda install -y -c r r-base=3.6.1
-conda install -y cmake
-conda install -y cxx-compiler
+
+conda install -y git jq
 echo "Done preparing kernel"

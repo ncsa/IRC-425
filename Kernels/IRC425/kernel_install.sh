@@ -10,7 +10,7 @@ echo "starting software installs"
 
 # submodule section
 # auth required?
-for dir in $(jq -r 'keys[]' $json_tags | sort); do
+for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)
   url=$(jq -r ".\"$dir\".url" $json_tags)
