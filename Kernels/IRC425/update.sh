@@ -36,14 +36,14 @@ for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
     git submodule update --init --recursive $target_dir
     echo "[$dir] checking out $tag"
     echo "current dir: ${PWD}"
-    echo "moving to: "$target_dir
-
-    (cd $target_dir; git checkout $tag) || return
-    echo "moving to: "
+    cd $target_dir || return
+    echo "current dir: ${PWD}"
+    git checkout $tag || return
     echo "current dir: ${PWD}"
 #    git add $target_dir
     cd ../../../
     echo "current dir: ${PWD}"
+    echo "done with: "$tag
   fi
   echo "| ${dir} | ${tag} |"
 #  echo "| ${dir} | ${tag} |" >> README.md
