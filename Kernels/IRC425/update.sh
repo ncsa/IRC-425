@@ -15,7 +15,12 @@ json_tags="$custom_kernel_path""tags.json"
 #echo "| module | version |" >> README.md
 #echo "| ------ | ------- |" >> README.md
 
-source $custom_kernel_path"/kernel_prepare.sh"
+if source $custom_kernel_path"/kernel_prepare.sh"; then
+  echo 'Prepared kernel correctly.'
+else
+  echo "Couldn't prepare kernel."
+  return
+fi
 
 for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
   if [ "$dir" == "$custom_kernel" ]; then continue; fi

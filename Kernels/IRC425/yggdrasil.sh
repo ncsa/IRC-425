@@ -16,6 +16,7 @@ git submodule update --init --recursive
 echo "running pip install for "$iam
 pip install . || return
 echo "Done."
+conda install -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.sbml yggdrasil.rmq
 # really.
 cd ../../../
 echo "current dir: ${PWD}"

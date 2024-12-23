@@ -12,6 +12,7 @@ echo "installing "$iam
 cd $custom_kernel_path"/"$iam || return
 echo "current dir: ${PWD}"
 git submodule update --init --recursive
+conda remove -y r-base
 conda install -y -c conda-forge jupyterlab
 conda install -y ipywidgets
 pip install -e "."
