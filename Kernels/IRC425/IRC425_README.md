@@ -20,10 +20,10 @@ Note, this essentially sources, in sequence:
 
 which installs, in order:
 
-| Submodule             | Repository                                             | branch/tag              | installation script   |
-|-----------------------|--------------------------------------------------------|-------------------------|-----------------------|
-| ePhotosynthesis_C     | https://github.com/cropsinsilico/ePhotosynthesis_C     | SoybeanParameterization | ePhotosynthesis.sh    |
-| yggdrasil             | https://github.com/cropsinsilico/yggdrasil             | main                    | yggdrasil.sh          | 
-| Soybean-BioCro        | https://github.com/cropsinsilico/Soybean-BioCro        | main                    | soybean-biocro.sh     | 
-| jupyterlab_nodeeditor | https://github.com/cropsinsilico/jupyterlab_nodeeditor | main                    | jupyterlab_nodeeditor |
+| Submodule             | Repository                                             | branch/tag              | installation script      |
+|-----------------------|--------------------------------------------------------|-------------------------|--------------------------|
+| ePhotosynthesis_C     | https://github.com/cropsinsilico/ePhotosynthesis_C     | SoybeanParameterization | ePhotosynthesis.sh       |
+| yggdrasil             | https://github.com/cropsinsilico/yggdrasil             | main                    | yggdrasil.sh             | 
+| Soybean-BioCro        | https://github.com/cropsinsilico/Soybean-BioCro        | main                    | soybean-biocro.sh        | 
+| jupyterlab_nodeeditor | https://github.com/cropsinsilico/jupyterlab_nodeeditor | main                    | jupyterlab_nodeeditor.sh |
 

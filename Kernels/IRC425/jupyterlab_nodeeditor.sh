@@ -15,6 +15,7 @@ git submodule update --init --recursive
 conda remove -y r-base
 conda install -y -c conda-forge jupyterlab
 conda install -y ipywidgets
+conda install -y nodejs
 pip install -e "."
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite
@@ -26,4 +27,4 @@ echo "Done."
 # really.
 cd ../../../
 echo "current dir: ${PWD}"
-# yggdrasil done
+# jupyterlab nodeeditor done
