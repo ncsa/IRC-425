@@ -12,7 +12,7 @@
 ## How to prepare this kernel
 From within the repository root, run:
 
-```source ./Kernels/IRC425/update.sh ```
+```source ./Kernels/IRC425/install.sh ```
 
 Note, this essentially sources, in sequence:
 1. kernel_prepare.sh

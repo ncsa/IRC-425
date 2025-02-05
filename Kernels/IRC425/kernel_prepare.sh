@@ -1,20 +1,32 @@
 #!/bin/bash
-# manual install record; much changes needed for automation
 
-custom_kernel="IRC425"
-custom_kernel_path="./Kernels/$custom_kernel/"
-json_tags="$custom_kernel_path""tags.json"
+# env vars specific to icrn custom kernels:
+#  jupyter_custom_kernel_path  jupyter_custom_kernel_name  jupyter_custom_kernel_version
 
-target_conda_environment_location="$HOME/scratch/Conda/Envs/$custom_kernel"
+if [[ -z "${jupyter_custom_kernel_name}" ]]; then
+  echo ERROR: Environment variable unset: jupyter_custom_kernel_name
+  return 1
+fi
+
+if [[ -z "${jupyter_custom_kernel_version}" ]]; then
+  echo ERROR: Environment variable unset: jupyter_custom_kernel_version
+  return 1
+fi
+
+if [[ -z "${jupyter_custom_kernel_path}" ]]; then
+  echo ERROR: Environment variable unset: jupyter_custom_kernel_path
+  return 1
+fi
+
+target_conda_environment_location="$jupyter_custom_kernel_path/$jupyter_custom_kernel_version/"
 python_version="3.11"
-
 
 echo "Starting kernel preparation"
 echo "preparing conda environment"
 conda config --add channels conda-forge
 
 conda create -y --prefix "$target_conda_environment_location" python=$python_version
-echo "created conda environment: "$custom_kernel
+echo "created conda environment: "$jupyter_custom_kernel_name
 eval "$(conda shell.bash hook)"
 if conda activate "$target_conda_environment_location"
 then

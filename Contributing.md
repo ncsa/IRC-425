@@ -8,6 +8,13 @@ issues or problems around automation, and exposure of custom kernels to users, p
 For questions regarding individual kernels, their current version, and updates, please contact the individual listed in 
 the kernel description documentation.
 
+### Kernel organization
+Each custom kernel should be contained with a directory under ./Kernels/ and should have a short but descriptive name 
+relevant to individuals outside of the project. Ideally, these custom kernels are maintained through a CI pipeline and will not require manual updates.
+
+Prior to pull requests integrating new custom kernels into the overall list of maintained kernels, the listing in the 
+main readme should be expanded with the required information, as tabulated below.
+
 ### Workflow
 
 1. Create a subdirectory for your kernel within the [kernels directory](./Kernels/)
@@ -15,13 +22,7 @@ the kernel description documentation.
 3. if your project has git submodules; create a 'tags.json' file which identifies the repositories and their branch/version leveraged by the custom kernel
 4. include necessary git automation to checkout the appropriate branches/commits for each of the git submodules
 5. create an entry in the kernel listing in the kernels [readme](./Kernels)
- 
-### Kernel organization
-Each custom kernel should be contained with a directory under ./Kernels/ and should have a short but descriptive name 
-relevant to individuals outside of the project. Ideally, these custom kernels are maintained through a CI pipeline and will not require manual updates.
 
-Prior to pull requests integrating new custom kernels into the overall list of maintained kernels, the listing in the 
-main readme should be expanded with the required information, as tabulated below.
 
 ### Kernel Update
 
