@@ -79,13 +79,25 @@ echo "triggering install processes"
 source $working_directory"/kernel_install.sh"
 echo "done with installs"
 
-#echo "starting ipykernel installation"
-#python -m ipykernel install --user --name CustomKernel01 --display-name="CustomKernel01"
-#jupyter kernelspec list
+if [ "$runtime_context" == "Prod" ]; then
+  jupyter_ipykernel_name="$jupyter_custom_kernel_name-$jupyter_custom_kernel_version"
+  echo "starting ipykernel installation as "$jupyter_ipykernel_name
+  if python -m ipykernel install --user --name $jupyter_ipykernel_name --display-name="$jupyter_ipykernel_name"
+  then
+    echo "Kernel installation successful"
+  else
+    echo "Error during kernel installation."
+    return
+  fi
+  jupyter kernelspec list
+fi
+
+# jupyter kernelspec uninstall $jupyter_ipykernel_name
+# conda remove -n $target_conda_environment_location --all
 
 echo "Exporting environment details to target location."
-conda env export > target_conda_environment_location"/conda_environment.yml"
-pip freeze > target_conda_environment_location"/python_requirements.txt"
+conda env export > $target_conda_environment_location"/conda_environment.yml"
+pip freeze > $target_conda_environment_location"/python_requirements.txt"
 
 echo "removing environment variables"
 unset jupyter_custom_kernel_path

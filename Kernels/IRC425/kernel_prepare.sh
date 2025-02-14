@@ -25,8 +25,14 @@ echo "Starting kernel preparation"
 echo "preparing conda environment"
 conda config --add channels conda-forge
 
-conda create -y --prefix "$target_conda_environment_location" python=$python_version
-echo "created conda environment: "$jupyter_custom_kernel_name
+if conda create -y --prefix "$target_conda_environment_location" python=$python_version
+then
+  echo "created conda environment: "$target_conda_environment_location
+else
+  echo ERROR: Could not create conda environment.
+  return 1
+fi
+
 eval "$(conda shell.bash hook)"
 if conda activate "$target_conda_environment_location"
 then

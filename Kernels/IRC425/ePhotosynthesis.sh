@@ -28,10 +28,7 @@ echo "installing ePhotosynthesis_C"
 cd $working_directory"/ePhotosynthesis_C" || return
 echo "current dir: ${PWD}"
 git submodule update --init --recursive
-conda install -y -c conda-forge 'sundials<=5.7.0'
-conda install -y boost
-conda install -y 'cmake>=3.10'
-conda install -y cxx-compiler
+conda install -y -c conda-forge make 'sundials<=5.7.0' 'cmake>=3.10' boost cxx-compiler
 mkdir Build || return
 
 echo "current dir: ${PWD}"
