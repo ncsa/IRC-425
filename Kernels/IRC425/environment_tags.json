@@ -1,0 +1,44 @@
+{
+  "kernel_display_name": "IRC425",
+  "kernel_install_name": "IRC425",
+  "kernel_version": "0.0.1",
+  "is_latest": "TRUE",
+  "channels": {
+    "manual": [
+      {
+        "name": "jupyterlab_nodeeditor",
+        "tag": "main",
+        "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
+        "install": "jupyterlab_nodeeditor.sh"
+      }
+    ],
+    "ICRN_NCSA_Custom_Channel": [
+      {
+        "name": "yggdrasil",
+        "version": ""
+      },
+      {
+        "name": "soybean-biocro",
+        "version": ""
+      },
+      {
+        "name": "jupyterlab_nodeeditor",
+        "version": ""
+      },
+      {
+        "name": "ePhotosynthesis",
+        "version": ""
+      }
+    ],
+    "conda-forge": [
+      {
+        "name": "networkx",
+        "version": "=3.2.1"
+      },
+      {
+        "name": "requests",
+        "version": ""
+      }
+    ]
+  }
+}

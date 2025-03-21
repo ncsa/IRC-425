@@ -4,7 +4,7 @@ Illinois Computes Research Notebook community broadly. This enables individuals 
 management and package installation to nevertheless access custom software in an easy and maintainable way.
 
 ## This Readme
-Please refer to the [Contributing](./Contributing.md) document in this repository on standards for contribution to 
+Please refer to the [Contributing](./Contributing_kernels) document in this repository on standards for contribution to 
 pre-compiled kernels within the ICRN system. This document exists to catalogue the kernels which are part of this project
 and to provide versioning, contact, and expiration information for each kernel.
 

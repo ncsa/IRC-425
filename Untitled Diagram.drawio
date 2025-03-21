@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.16">
+  <diagram name="Page-1" id="DctumxyX5J_KbYrcCDzB">
+    <mxGraphModel dx="2284" dy="738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="740" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0000FF;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" y="380" as="sourcePoint" />
+            <mxPoint x="820" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-4" value="X-axis Motor" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-5" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0000FF;strokeWidth=5;" edge="1" parent="1" source="A4Qa3vxC4Bs0i8fhacOX-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="434.5" y="410" as="sourcePoint" />
+            <mxPoint x="434.5" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-8" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0000FF;strokeWidth=5;" edge="1" parent="1" target="A4Qa3vxC4Bs0i8fhacOX-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="434.5" y="410" as="sourcePoint" />
+            <mxPoint x="434.5" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-3" value="Sensor Head mount" style="rounded=1;whiteSpace=wrap;html=1;rotation=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="230" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-11" value="Switch&lt;br&gt;(PoE)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="390" y="280" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=4;" edge="1" parent="1" source="A4Qa3vxC4Bs0i8fhacOX-12" target="A4Qa3vxC4Bs0i8fhacOX-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-12" value="Wall RJ45 socket" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-15" value="luxonis camera" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="255" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#f8cecc;strokeColor=#FF3333;strokeWidth=5;" edge="1" parent="1" source="A4Qa3vxC4Bs0i8fhacOX-16" target="A4Qa3vxC4Bs0i8fhacOX-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-50" y="470" />
+              <mxPoint x="30" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=4;" edge="1" parent="1" source="A4Qa3vxC4Bs0i8fhacOX-16" target="A4Qa3vxC4Bs0i8fhacOX-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;strokeColor=#FF3333;strokeWidth=5;" edge="1" parent="1" source="A4Qa3vxC4Bs0i8fhacOX-16" target="A4Qa3vxC4Bs0i8fhacOX-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-16" value="Laptop" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-18" value="NEMA Enclosure" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="450" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A4Qa3vxC4Bs0i8fhacOX-19" value="Y-axis motor" style="rounded=1;whiteSpace=wrap;html=1;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="390" width="70" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

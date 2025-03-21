@@ -21,7 +21,7 @@ main readme should be expanded with the required information, as tabulated below
 2. create an 'update.sh' file that contains all of the needed commands to build and install your kernel as a custom ipy kernel
 3. if your project has git submodules; create a 'tags.json' file which identifies the repositories and their branch/version leveraged by the custom kernel
 4. include necessary git automation to checkout the appropriate branches/commits for each of the git submodules
-5. create an entry in the kernel listing in the kernels [readme](./Kernels)
+5. create an entry in the kernel listing in the [kernels readme](./Kernel_listing.md)
 
 
 ### Kernel Update
