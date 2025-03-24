@@ -9,9 +9,9 @@
 # for each [tarball] in [package dir]: [grayskull] it into a [recipe]
 # for each [prebuilt recipe]: build it into [target channel]
 
-#icrn_runtime_context="dryrun"
+icrn_runtime_context="dryrun"
 #icrn_runtime_context="Prod"
-icrn_runtime_context="UAT"
+#icrn_runtime_context="UAT"
 
 if [ "$icrn_runtime_context" == "Prod" ]; then
   base_conda_directory="/sw/icrn/jupyter/icrn_ncsa_resources"

@@ -4,40 +4,34 @@
   "kernel_version": "0.0.1",
   "is_latest": "TRUE",
   "channels": {
+    "ICRN_NCSA_Custom_Channel": [
+    ],
+    "conda-forge": [
+    ],
     "manual": [
+      {
+        "name": "ePhotosynthesis_C",
+        "tag": "SoybeanParameterization",
+        "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
+        "install": "ePhotosynthesis.sh"
+      },
+      {
+        "name": "yggdrasil",
+        "tag": "main",
+        "url": "https://github.com/cropsinsilico/yggdrasil",
+        "install": "yggdrasil.sh"
+      },
+      {
+        "name": "Soybean-BioCro",
+        "tag": "main",
+        "url": "https://github.com/cropsinsilico/Soybean-BioCro",
+        "install": "soybean-biocro.sh"
+      },
       {
         "name": "jupyterlab_nodeeditor",
         "tag": "main",
         "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
         "install": "jupyterlab_nodeeditor.sh"
-      }
-    ],
-    "ICRN_NCSA_Custom_Channel": [
-      {
-        "name": "yggdrasil",
-        "version": ""
-      },
-      {
-        "name": "soybean-biocro",
-        "version": ""
-      },
-      {
-        "name": "jupyterlab_nodeeditor",
-        "version": ""
-      },
-      {
-        "name": "ePhotosynthesis",
-        "version": ""
-      }
-    ],
-    "conda-forge": [
-      {
-        "name": "networkx",
-        "version": "=3.2.1"
-      },
-      {
-        "name": "requests",
-        "version": ""
       }
     ]
   }

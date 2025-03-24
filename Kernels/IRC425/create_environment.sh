@@ -6,8 +6,13 @@ jupyter_custom_kernel_name="IRC425"
 jupyter_custom_kernel_version="latest"
 
 icrn_runtime_context="dryrun"
-#icrn_runtime_context="Prod"
+#icrn_runtime_context="Dev"
 #icrn_runtime_context="UAT"
+#icrn_runtime_context="Prod"
+
+echo "beginning installation in context: "$icrn_runtime_context
+sleep 5s
+
 
 if [ "$icrn_runtime_context" == "Prod" ]; then
   base_conda_directory="/sw/icrn/jupyter/icrn_ncsa_resources"
@@ -21,7 +26,7 @@ icrn_base_working_dir=$PWD
 icrn_environments_path="$base_conda_directory/icrn_ncsa_managed_environments"
 icrn_custom_channel_path="$base_conda_directory/icrn_ncsa_custom_channel"
 
-working_directory="./Kernels/"$jupyter_custom_kernel_name
+working_directory="./Kernels/"$jupyter_custom_kernel_name"/"
 json_tags="$working_directory/environment_tags.json"
 
 echo "Set and Interpreted Variables:"
@@ -48,24 +53,24 @@ export icrn_custom_channel_path
 export icrn_base_working_dir
 export icrn_environments_path
 
-echo "invoking kernel_prepare.sh"
-if source $working_directory"/resources/kernel_prepare.sh"; then
+echo "invoking kernel_1_prepare.sh"
+if source $working_directory"/resources/kernel_1_prepare.sh"; then
   echo 'Prepared kernel correctly.'
 else
   echo "Couldn't prepare kernel."
   return
 fi
 
-echo "Invoking kernel_populate.sh"
-if source $working_directory"/resources/kernel_populate.sh"; then
+echo "Invoking kernel_2_populate.sh"
+if source $working_directory"/resources/kernel_2_populate.sh"; then
   echo 'Installed packages into kernel.'
 else
   echo "Error during package installation."
   return
 fi
 
-echo "Invoking kernel_install.sh"
-if source $working_directory"/resources/kernel_install.sh"; then
+echo "Invoking kernel_3_install.sh"
+if source $working_directory"/resources/kernel_3_install.sh"; then
   if [ "$icrn_runtime_context" == "Prod" ]; then
     echo 'Installed kernel into jupyter.'
   else

@@ -53,6 +53,7 @@ if [ "$icrn_runtime_context" == "Prod" ]; then
   jupyter kernelspec list
 else
   echo "Not running in prod - will not install into jupyter at this time."
-  echo "install command: "
+  echo "install commands: "
   echo "python -m ipykernel install --user --name $kernel_install_name --display-name=$kernel_display_name"
+  echo 'python -m ipykernel install --user --name '$kernel_install_name'-latest --display-name='$kernel_display_name'-latest'
 fi

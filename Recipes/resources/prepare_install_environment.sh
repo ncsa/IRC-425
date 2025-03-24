@@ -36,7 +36,7 @@ working_directory="./Recipes"
 json_tags="$working_directory/recipe_tags.json"
 
 conda_install_env="IRC425_Installs"
-
+# python -m conda_index
 # create the subdirs, get the git repos, add them as submodules if needed, checkout branches
 conda config --add channels conda-forge
 
