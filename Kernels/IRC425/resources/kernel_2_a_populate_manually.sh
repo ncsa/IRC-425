@@ -28,6 +28,8 @@ for package_i in `seq 0 $(($number_packages - 1))`; do
         echo "Dryrun: "
         echo 'git submodule add '$url $target_dir
       else
+        echo 'adding git submodule:'
+        echo 'git submodule add '$url $target_dir
         git submodule add $url $target_dir
       fi
     fi

@@ -43,7 +43,6 @@ else
   conda config --add channels conda-forge || return 1
   conda config --add channels $icrn_custom_channel_path || return 1
   conda config --set channel_priority strict || return 1
-
   conda install -y conda-build conda-verify git jq ipykernel || return 1
 fi
 
