@@ -18,25 +18,20 @@ fi
 #  return 1
 #fi
 
-iam="ePhotosynthesis_C"
 
-echo "installing ePhotosynthesis_C"
-cd $working_directory"/ePhotosynthesis_C" || return
-echo "current dir: ${PWD}"
-git submodule update --init --recursive
-conda install -y -c conda-forge make 'sundials<=5.7.0' 'cmake>=3.10' boost cxx-compiler
-mkdir Build || return
+iam="jupyterlab_nodeeditor"
 
+echo "installing extension: "$iam
+cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
-cd Build || return
-echo 'cmake call'
-cmake ../ || return
-echo 'first make'
-make || return
-echo 'make install'
-make DESTDIR="$CONDA_PREFIX"/lib install
-echo "Done."
+
+# Link your development version of the extension with JupyterLab
+jupyter labextension develop . --overwrite
+# Server extension must be manually installed in develop mode
+jupyter server extension enable jupyterlab_nodeeditor
+# Rebuild extension Typescript source after making changes
+jlpm build
+echo "Done installing extension: $iam"
 # really.
-cd ../../../../
+cd ../../../
 echo "current dir: ${PWD}"
-# ePhotosynthesis_C done

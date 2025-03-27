@@ -5,8 +5,8 @@
 jupyter_custom_kernel_name="IRC425"
 jupyter_custom_kernel_version="latest"
 
-icrn_runtime_context="dryrun"
-#icrn_runtime_context="Dev"
+#icrn_runtime_context="dryrun"
+icrn_runtime_context="Dev"
 #icrn_runtime_context="UAT"
 #icrn_runtime_context="Prod"
 
@@ -54,7 +54,7 @@ export icrn_base_working_dir
 export icrn_environments_path
 
 echo "invoking kernel_1_prepare.sh"
-if source $working_directory"/resources/kernel_1_prepare.sh"; then
+if source $working_directory"/kernel_resources/kernel_1_prepare.sh"; then
   echo 'Prepared kernel correctly.'
 else
   echo "Couldn't prepare kernel."
@@ -62,7 +62,7 @@ else
 fi
 
 echo "Invoking kernel_2_populate.sh"
-if source $working_directory"/resources/kernel_2_populate.sh"; then
+if source $working_directory"/kernel_resources/kernel_2_populate.sh"; then
   echo 'Installed packages into kernel.'
 else
   echo "Error during package installation."
@@ -70,7 +70,7 @@ else
 fi
 
 echo "Invoking kernel_3_install.sh"
-if source $working_directory"/resources/kernel_3_install.sh"; then
+if source $working_directory"/kernel_resources/kernel_3_install.sh"; then
   if [ "$icrn_runtime_context" == "Prod" ]; then
     echo 'Installed kernel into jupyter.'
   else
@@ -85,6 +85,19 @@ fi
 echo "Custom environment creation and jupyter kernel installation complete."
 echo "base working directory for this install: $icrn_base_working_dir"
 echo "conda channel location: $icrn_custom_channel_path"
+
+echo "Beginning Extension Installation..."
+sleep 5s
+if source $working_directory"/extension_resources/extensions_1_install_extensions.sh"; then
+  if [ "$icrn_runtime_context" == "Prod" ]; then
+    echo 'Installed extensions into jupyter - be certain you use the correct kernel with these extensions.'
+  else
+    echo 'Intentionally did not install extensions into jupyter - not running in production.'
+  fi
+else
+  echo "Error during extension installation."
+  return
+fi
 
 echo "removing environment variables"
 unset icrn_runtime_context

@@ -13,25 +13,29 @@
         "name": "ePhotosynthesis_C",
         "tag": "SoybeanParameterization",
         "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
-        "install": "ePhotosynthesis.sh"
+        "kernel_install": "ePhotosynthesis.sh",
+        "extension_install": ""
       },
       {
         "name": "yggdrasil",
         "tag": "main",
         "url": "https://github.com/cropsinsilico/yggdrasil",
-        "install": "yggdrasil.sh"
+        "kernel_install": "yggdrasil.sh",
+        "extension_install": ""
       },
       {
         "name": "Soybean-BioCro",
         "tag": "main",
         "url": "https://github.com/cropsinsilico/Soybean-BioCro",
-        "install": "soybean-biocro.sh"
+        "kernel_install": "soybean-biocro.sh",
+        "extension_install": ""
       },
       {
         "name": "jupyterlab_nodeeditor",
         "tag": "main",
         "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
-        "install": "jupyterlab_nodeeditor.sh"
+        "kernel_install": "jupyterlab_nodeeditor.sh",
+        "extension_install": "jupyterlab_nodeeditor.sh"
       }
     ]
   }

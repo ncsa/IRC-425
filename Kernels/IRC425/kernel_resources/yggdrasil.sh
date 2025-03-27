@@ -18,19 +18,18 @@ fi
 #  return 1
 #fi
 
-iam="Soybean-BioCro"
+iam="yggdrasil"
 
 echo "installing "$iam
 cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
 echo "resolving git submodules for "$iam
 git submodule update --init --recursive
-echo "Installing R and deps for "$iam
-conda install -y -c r r-base=3.6.3
-conda install -y -c r r-lattice
-echo "running R cmd install for "$iam
-R CMD INSTALL biocro || return
+echo "running pip install for "$iam
+pip install . || return
 echo "Done."
+#conda install --solver=libmamba -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.sbml yggdrasil.rmq
+conda install --solver=libmamba -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.rmq
 # really.
 cd ../../../
 echo "current dir: ${PWD}"

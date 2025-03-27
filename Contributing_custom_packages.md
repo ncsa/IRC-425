@@ -15,6 +15,20 @@ relevant to individuals outside of the project. Ideally, these custom kernels ar
 Prior to pull requests integrating new custom kernels into the overall list of maintained kernels, the listing in the 
 main readme should be expanded with the required information, as tabulated below.
 
+### Custom Packages
+In the context of this project, a custom package is any collection of libraries and dependencies which can be housed within a locally hosted conda channel. 
+This channel is intended to house custom, novel, or specific builds of packages which are not broadly available, but are required for computational research through the ICRN.
+A custom package can be hosted by NCSA without necessarily being included in a custom Kernel for use in the ICRN. 
+
+A custom package may be a simple python package, or it may be a collection of various compiled and uncompiled languages. 
+
+In the case of a package consisting of only Python files, Grayskull can be used to create the required Conda recipe, which makes inclusion of a pure-python package in the custom package channel fairly simple.
+
+In the case in which the package is more complex, guidance on creating a recipe for these packages can be found: HERE
+
+In either case, within the repository which contains your package's source, a directory './Recipes' should contain the required recipe, and an entry for this repository should be created in the json file in this repository.
+(make this better)
+
 ### Sketch
 1. what a custom package is
 2. determining how you can create a recipe

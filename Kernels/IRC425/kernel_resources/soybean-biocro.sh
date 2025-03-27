@@ -18,26 +18,32 @@ fi
 #  return 1
 #fi
 
-
-iam="jupyterlab_nodeeditor"
+iam="Soybean-BioCro"
 
 echo "installing "$iam
-cd $working_directory"/"$iam || return
+cd $working_directory"/"$iam || return 1
 echo "current dir: ${PWD}"
+echo "resolving git submodules for "$iam
 git submodule update --init --recursive
-conda remove -y r-base
-conda install -y -c conda-forge jupyterlab ipywidgets nodejs
-#conda install -y ipywidgets
-#conda install -y nodejs
-pip install -e "."
-# Link your development version of the extension with JupyterLab
-jupyter labextension develop . --overwrite
-# Server extension must be manually installed in develop mode
-jupyter server extension enable jupyterlab_nodeeditor
-# Rebuild extension Typescript source after making changes
-jlpm build
+echo "Installing R and deps for "$iam
+
+#if conda install -y -c r --solver=libmamba 'r-base<=3.6.3' r-lattice
+#then
+#  echo 'installation of R libraries successful'
+#else
+#  echo 'Could not install R libraries for Soybean BioCro - cannot continue.'
+#  exit
+#fi
+
+
+echo "running R cmd install for "$iam
+if R CMD INSTALL biocro
+then
+  echo 'installation of biocro successful.'
+  cd ../../../
+else
+  echo 'installation of biocro not successful.'
+  cd ../../../
+fi
 echo "Done."
 # really.
-cd ../../../
-echo "current dir: ${PWD}"
-# jupyterlab nodeeditor done

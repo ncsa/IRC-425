@@ -18,18 +18,26 @@ fi
 #  return 1
 #fi
 
-iam="yggdrasil"
+
+iam="jupyterlab_nodeeditor"
 
 echo "installing "$iam
+# working directory here is actually 2 layers, so this is 2+1 deep
 cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
-echo "resolving git submodules for "$iam
 git submodule update --init --recursive
-echo "running pip install for "$iam
-pip install . || return
+#conda remove -y  --solver=libmamba r-base
+#conda install -y -c conda-forge --solver=libmamba jupyterlab ipywidgets nodejs
+
+pip install -e "."
+# Link your development version of the extension with JupyterLab
+jupyter labextension develop . --overwrite
+# Server extension must be manually installed in develop mode
+jupyter server extension enable jupyterlab_nodeeditor
+# Rebuild extension Typescript source after making changes
+jlpm build
 echo "Done."
-conda install -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.sbml yggdrasil.rmq
 # really.
 cd ../../../
 echo "current dir: ${PWD}"
-# yggdrasil done
+# jupyterlab nodeeditor done

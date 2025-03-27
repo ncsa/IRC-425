@@ -8,7 +8,7 @@ echo "Beginning to process channels & packages..."
 for channel in $(jq -r '.channels | keys[]' $json_tags); do
   echo "processing channel: "$channel
   if [ "$channel" == "manual" ]; then
-    source $working_directory"/resources/kernel_2_a_populate_manually.sh"
+    source $working_directory"/kernel_resources/kernel_2_a_populate_manually.sh"
   else
     if [ "$channel" == "ICRN_NCSA_Custom_Channel" ]; then
       this_channel=$icrn_custom_channel_path
@@ -38,10 +38,10 @@ for channel in $(jq -r '.channels | keys[]' $json_tags); do
     if [ "$package_listing" != "" ]; then
       if [ "$icrn_runtime_context" == "dryrun" ]; then
         echo "Dryrun: "
-        echo 'conda install -y '${package_listing}
+        echo 'conda install --solver=libmamba -y '${package_listing}
       else
-        echo 'conda install -y '${package_listing}
-        conda install -y ${package_listing} || return 1
+        echo 'conda install --solver=libmamba -y '${package_listing}
+        conda install --solver=libmamba -y ${package_listing} || return 1
       fi
     else
       echo 'no packages for '$this_channel

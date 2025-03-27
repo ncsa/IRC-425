@@ -17,17 +17,14 @@ main readme should be expanded with the required information, as tabulated below
 
 ### Workflow
 
-1. Create a subdirectory for your kernel within the [kernels directory](./Kernels/)
-2. create an 'update.sh' file that contains all of the needed commands to build and install your kernel as a custom ipy kernel
-3. if your project has git submodules; create a 'tags.json' file which identifies the repositories and their branch/version leveraged by the custom kernel
-4. include necessary git automation to checkout the appropriate branches/commits for each of the git submodules
-5. create an entry in the kernel listing in the [kernels readme](./Kernel_listing.md)
+In order to fully support a custom Kernel on the ICRN, you will need to understand the components of the JupyterLab interface.
 
+There are three main components which must be supported:
+- A conda environment, which is installable into JupyterLab as a custom kernel
+- If the conda environment depends on novel, custom, or specific versions of packages, you will need to create a conda recipe
+- If the research requires extensions in the JupyterLab interface, you will need to create a shell script which installs those extensions 
+  - If the extensions rely on custom packages, you will also need to create conda recipes for those custom packages as well
 
-### Kernel Update
-
-
-### Kernel Uninstall
 
 
 

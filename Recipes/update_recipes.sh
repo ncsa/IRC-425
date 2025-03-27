@@ -68,9 +68,9 @@ else
   return 1
 fi
 
-# Pull resources from git
+# Pull kernel_resources from git
 if source $working_directory"/resources/pull_resources.sh"; then
-  echo 'obtained resources from git and/or remote sources.'
+  echo 'obtained kernel_resources from git and/or remote sources.'
 else
   echo "Couldn't obtain resources."
   return 1

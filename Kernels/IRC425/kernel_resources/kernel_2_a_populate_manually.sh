@@ -13,7 +13,8 @@ echo "found $number_packages to iterate through"
 for package_i in `seq 0 $(($number_packages - 1))`; do
   tag=$(jq -r ".channels.$channel.[$package_i].tag" $json_tags)
   url=$(jq -r ".channels.$channel.[$package_i].url" $json_tags)
-  install_script=$(jq -r ".channels.$channel.[$package_i].install" $json_tags)
+  install_script=$(jq -r ".channels.$channel.[$package_i].kernel_install" $json_tags)
+#  extension_script=$(jq -r ".channels.$channel.[$package_i].extension_install" $json_tags)
   package_name=$(jq -r ".channels.$channel.[$package_i].name" $json_tags)
   target_dir=$working_directory""$package_name
   echo "| ${package_name} | ${tag} |"
@@ -44,7 +45,7 @@ for package_i in `seq 0 $(($number_packages - 1))`; do
         echo "triggering install of $package_name"
         # not invoking manual install scripts as part of dryrun
         echo "warning: will not invoke manual install scripts as part of dryrun. ensure you test these."
-        echo 'source '$working_directory'resources/'$install_script
+        echo 'source '$working_directory'/kernel_resources/'$install_script
     else
       git submodule update --init --recursive $target_dir
       echo "[$package_name] checking out $tag"
@@ -57,7 +58,7 @@ for package_i in `seq 0 $(($number_packages - 1))`; do
       echo "current dir: ${PWD}"
 
       echo "triggering install of $package_name"
-      source $working_directory"resources/"$install_script
+      source $working_directory"/kernel_resources/"$install_script
 
       echo "done with: "$tag
     fi
