@@ -1,0 +1,13 @@
+[submodule "Kernels/IRC425/yggdrasil"]
+	path = Kernels/IRC425/yggdrasil
+	url = https://github.com/cropsinsilico/yggdrasil
+[submodule "Kernels/IRC425/Soybean-BioCro"]
+	path = Kernels/IRC425/Soybean-BioCro
+	url = https://github.com/cropsinsilico/Soybean-BioCro
+[submodule "Kernels/IRC425/jupyterlab_nodeeditor"]
+	path = Kernels/IRC425/jupyterlab_nodeeditor
+	url = https://github.com/cropsinsilico/jupyterlab_nodeeditor
+[submodule "Kernels/IRC425/ePhotosynthesis_C"]
+	path = Kernels/IRC425/ePhotosynthesis_C
+	url = https://github.com/cropsinsilico/ePhotosynthesis_C
+	branch = SoybeanParameterization
