@@ -13,28 +13,23 @@ if [[ -z "${jupyter_custom_kernel_version}" ]]; then
   return 1
 fi
 
-if [[ -z "${jupyter_custom_kernel_path}" ]]; then
-  echo ERROR: Environment variable unset: jupyter_custom_kernel_path
-  return 1
-fi
+#if [[ -z "${jupyter_custom_kernel_path}" ]]; then
+#  echo ERROR: Environment variable unset: jupyter_custom_kernel_path
+#  return 1
+#fi
 
-target_conda_environment_location="$jupyter_custom_kernel_path/$jupyter_custom_kernel_version/"
-working_directory="./Kernels/$jupyter_custom_kernel_name/"
-json_tags="$working_directory""tags.json"
-
-iam="Soybean-BioCro"
+iam="yggdrasil"
 
 echo "installing "$iam
 cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
 echo "resolving git submodules for "$iam
 git submodule update --init --recursive
-echo "Installing R and deps for "$iam
-conda install -y -c r r-base=3.6.3
-conda install -y -c r r-lattice
-echo "running R cmd install for "$iam
-R CMD INSTALL biocro || return
+echo "running pip install for "$iam
+pip install . || return
 echo "Done."
+#conda install --solver=libmamba -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.sbml yggdrasil.rmq
+conda install --solver=libmamba -y yggdrasil.zmq yggdrasil.r yggdrasil.fortran yggdrasil.rmq
 # really.
 cd ../../../
 echo "current dir: ${PWD}"
