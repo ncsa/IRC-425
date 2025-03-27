@@ -69,17 +69,19 @@ else
   return
 fi
 
-echo "Invoking kernel_3_install.sh"
-if source $working_directory"/kernel_resources/kernel_3_install.sh"; then
-  if [ "$icrn_runtime_context" == "Prod" ]; then
-    echo 'Installed kernel into jupyter.'
-  else
-    echo 'Intentionally did not install kernel into jupyter - not running in production.'
-  fi
-else
-  echo "Error during kernel installation."
-  return
-fi
+# removing auto-install. this is not needed when creating the kernels in 'prod', as the user of these kernels
+# will install it on their own. The users also will install these kernels on their own when they are ready to do so.
+#echo "Invoking kernel_3_install.sh"
+#if source $working_directory"/kernel_resources/kernel_3_install.sh"; then
+#  if [ "$icrn_runtime_context" == "Prod" ]; then
+#    echo 'Installed kernel into jupyter.'
+#  else
+#    echo 'Intentionally did not install kernel into jupyter - not running in production.'
+#  fi
+#else
+#  echo "Error during kernel installation."
+#  return
+#fi
 
 
 echo "Custom environment creation and jupyter kernel installation complete."
