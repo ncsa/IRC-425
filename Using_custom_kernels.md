@@ -25,7 +25,7 @@ In order to correctly prepare your terminal for using custom kernels and extensi
 conda init
 bash
 ```
-![img.png](img.png)
+![img.png](readme_resources/img.png)
 (note in particular the environment designator: 'base' )
 
 #### Determine available custom kernels

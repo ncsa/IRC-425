@@ -28,15 +28,15 @@ echo "current dir: ${PWD}"
 git submodule update --init --recursive
 #conda remove -y  --solver=libmamba r-base
 #conda install -y -c conda-forge --solver=libmamba jupyterlab ipywidgets nodejs
-
+echo $iam" package: pip install -e '.' "
 pip install -e "."
-# Link your development version of the extension with JupyterLab
-jupyter labextension develop . --overwrite
-# Server extension must be manually installed in develop mode
-jupyter server extension enable jupyterlab_nodeeditor
-# Rebuild extension Typescript source after making changes
-jlpm build
-echo "Done."
+## Link your development version of the extension with JupyterLab
+#jupyter labextension develop . --overwrite
+## Server extension must be manually installed in develop mode
+#jupyter server extension enable jupyterlab_nodeeditor
+## Rebuild extension Typescript source after making changes
+#jlpm build
+#echo "Done."
 # really.
 cd ../../../
 echo "current dir: ${PWD}"

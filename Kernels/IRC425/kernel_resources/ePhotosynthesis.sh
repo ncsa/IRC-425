@@ -39,4 +39,6 @@ echo "Done."
 # really.
 cd ../../../../
 echo "current dir: ${PWD}"
+echo "removing items to avoid conflicts"
+conda remove --solver=libmamba make cmake boost cxx-compiler
 # ePhotosynthesis_C done

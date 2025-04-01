@@ -17,17 +17,17 @@
         "extension_install": ""
       },
       {
-        "name": "yggdrasil",
-        "tag": "main",
-        "url": "https://github.com/cropsinsilico/yggdrasil",
-        "kernel_install": "yggdrasil.sh",
-        "extension_install": ""
-      },
-      {
         "name": "Soybean-BioCro",
         "tag": "main",
         "url": "https://github.com/cropsinsilico/Soybean-BioCro",
         "kernel_install": "soybean-biocro.sh",
+        "extension_install": ""
+      },
+      {
+        "name": "yggdrasil",
+        "tag": "main",
+        "url": "https://github.com/cropsinsilico/yggdrasil",
+        "kernel_install": "yggdrasil.sh",
         "extension_install": ""
       },
       {

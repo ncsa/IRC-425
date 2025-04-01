@@ -26,10 +26,13 @@ cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
 
 # Link your development version of the extension with JupyterLab
+echo $iam" extension: jupyter labextension develop . --overwrite"
 jupyter labextension develop . --overwrite
 # Server extension must be manually installed in develop mode
+echo $iam" extension: jupyter server extension enable jupyterlab_nodeeditor"
 jupyter server extension enable jupyterlab_nodeeditor
 # Rebuild extension Typescript source after making changes
+echo $iam" extension: jlpm build"
 jlpm build
 echo "Done installing extension: $iam"
 # really.

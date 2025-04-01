@@ -27,15 +27,15 @@ echo "resolving git submodules for "$iam
 git submodule update --init --recursive
 echo "Installing R and deps for "$iam
 
-#if conda install -y -c r --solver=libmamba 'r-base<=3.6.3' r-lattice
-#then
-#  echo 'installation of R libraries successful'
-#else
-#  echo 'Could not install R libraries for Soybean BioCro - cannot continue.'
-#  exit
-#fi
+if conda install -y -c r --solver=libmamba 'r<=3.6.3' 'r-base<=3.6.3' r-lattice
+then
+  echo 'installation of R libraries successful'
+else
+  echo 'Could not install R libraries for Soybean BioCro - cannot continue.'
+  exit
+fi
 
-
+# requires r<=3.6.3; r-base<=3.6.3
 echo "running R cmd install for "$iam
 if R CMD INSTALL biocro
 then
