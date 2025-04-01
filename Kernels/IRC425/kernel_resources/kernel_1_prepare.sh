@@ -12,9 +12,9 @@ echo "preparing conda environment"
 oneShotDependencies="jq git make 'sundials<=5.7.0' 'cmake>=3.10' boost cxx-compiler"
 if [ "$icrn_runtime_context" == "dryrun" ]; then
   echo "Dryrun: "
-  echo 'conda create -y --prefix '"$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y $oneShotDependencies"
+  echo 'conda create -y --prefix '"$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y "$oneShotDependencies
 else
-  if conda create -y --prefix "$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y $oneShotDependencies"
+  if conda create -y --prefix "$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y "$oneShotDependencies
   then
     echo "created conda environment: ""$icrn_environments_path/$jupyter_custom_kernel_name"
   else
