@@ -8,13 +8,14 @@ echo "preparing conda environment"
 #  conda install --solver=libmamba -c r -y python jupyterlab r r-lattice  || return 1
 #  conda install --solver=libmamba -y conda-build conda-verify git jq ipykernel ipywidgets nodejs || return 1
 #  conda install --solver=libmamba -y make 'sundials<=5.7.0' 'cmake>=3.10' boost cxx-compiler || return 1
+conda install -y -n base conda-libmamba-solver
 
 oneShotDependencies="jq git make 'sundials<=5.7.0' 'cmake>=3.10' boost cxx-compiler"
 if [ "$icrn_runtime_context" == "dryrun" ]; then
   echo "Dryrun: "
   echo 'conda create -y --prefix '"$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y "$oneShotDependencies
 else
-  if conda create -y --prefix "$icrn_environments_path/$jupyter_custom_kernel_name --solver=libmamba -c r -y "$oneShotDependencies
+  if conda create -y --prefix "$icrn_environments_path/$jupyter_custom_kernel_name" --solver=libmamba -c r -y $oneShotDependencies
   then
     echo "created conda environment: ""$icrn_environments_path/$jupyter_custom_kernel_name"
   else

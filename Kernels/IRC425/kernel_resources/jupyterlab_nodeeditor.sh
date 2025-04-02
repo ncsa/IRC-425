@@ -27,7 +27,7 @@ cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
 git submodule update --init --recursive
 #conda remove -y  --solver=libmamba r-base
-#conda install -y -c conda-forge --solver=libmamba jupyterlab ipywidgets nodejs
+conda install -y --solver=libmamba jupyterlab ipywidgets nodejs
 echo $iam" package: pip install -e '.' "
 pip install -e "."
 ## Link your development version of the extension with JupyterLab
