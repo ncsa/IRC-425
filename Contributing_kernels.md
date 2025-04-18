@@ -3,7 +3,7 @@
 ### Contact
 For questions regarding this repository, the interaction of this repository with the ICRN, and 
 issues or problems around automation, and exposure of custom kernels to users, please contact 
-[Christopher Heller](mailto:cheller@illinois.edu).
+[Henry Priest](mailto:hdpriest@illinois.edu).
 
 For questions regarding individual kernels, their current version, and updates, please contact the individual listed in 
 the kernel description documentation.
@@ -21,11 +21,15 @@ In order to fully support a custom Kernel on the ICRN, you will need to understa
 
 There are three main components which must be supported:
 - A conda environment, which is installable into JupyterLab as a custom kernel
-- If the conda environment depends on novel, custom, or specific versions of packages, you will need to create a conda recipe
+- If the conda environment depends on novel, custom, or specific versions of packages, you will need to create a conda recipe (see [Contributing custom packages](./Contributing_custom_packages.md))
 - If the research requires extensions in the JupyterLab interface, you will need to create a shell script which installs those extensions 
   - If the extensions rely on custom packages, you will also need to create conda recipes for those custom packages as well
 
-
+### Warning
+Custom JupyterLab extensions send and receive information to the active Kernel in a Jupyter Notebook. However,
+Jupyter extensions are independent of the specific Kernel a Jupyter notebook is running. An extension may require a
+certain Kernel to behave as expected. You will need to make clear to your users which extensions expect specific Kernels
+to be in-use to obtain expected behaviors.
 
 
 ### Template Kernel Definition (Use me for your next kernel!)

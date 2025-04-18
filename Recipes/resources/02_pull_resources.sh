@@ -1,9 +1,6 @@
 #!/bin/bash
 
 # shamelessly lifted from INCORE: https://github.com/IN-CORE/IN-CORE/blob/main/update.sh
-echo ""
-echo "######### Beginnning builds of custom packages ##########"
-echo ""
 
 if [[ -z "${icrn_base_working_dir}" ]]; then
   echo ERROR: could not determine ICRN base working directory: icrn_base_working_dir
@@ -35,13 +32,19 @@ if [[ -z "${icrn_custom_channel_path}" ]]; then
   return 1
 fi
 
+if [[ -z "${icrn_environments_path}" ]]; then
+  echo ERROR: Environment variable unset: icrn_environments_path
+  return 1
+fi
+
 working_directory="./Recipes"
 json_tags="$working_directory/recipe_tags.json"
 
-
 # create the subdirs, get the git repos, add them as submodules if needed, checkout branches
 for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
-  if [ "$dir" == "$jupyter_custom_kernel_name" ]; then continue; fi
+  if [ "$dir" == "$jupyter_custom_kernel_name" ]; then
+    continue
+  fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)
   url=$(jq -r ".\"$dir\".url" $json_tags)
   resourcePath=$(jq -r ".\"$dir\".resourcePath" $json_tags)
@@ -50,18 +53,29 @@ for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
 
   # git submodule handling: add or checkout correct tag
   if [ "$type" == "recipe" ]; then
-    echo "$dir is a custom recipe - doing nothing."
+    echo "obtaining $dir as custom recipe"
+    if [ ! -d $target_dir ]; then
+      echo "[$dir] missing submodule"
+      git submodule add $url $target_dir
+    fi
+    git submodule update --init --recursive $target_dir
+    cd $target_dir || return
+    # e.g. cd Recipes/ePhotosynthesis_C/
+    if ! [ "$tag" == "none" ]; then
+      git checkout $tag || return
+    fi
+    cd $icrn_base_working_dir || return
   elif [ "$type" == "package" ]; then
-    echo "$dir is a prebuilt package - creating a recipe..."
-    echo "prebuilt package location: $resourcePath"
-    echo "target location: $icrn_prebuilt_recipes_path"
-    mkdir -p $icrn_prebuilt_recipes_path"/$dir" || return 1
-    grayskull pypi --output $icrn_prebuilt_recipes_path"/$dir" $resourcePath  || return 1
-    echo "grayskull complete for $dir"
-    echo "invoking conda-build for $dir"
-    conda build --channel conda-forge --use-local --override-channels --no-anaconda-upload --quiet --output-folder $icrn_custom_channel_path $icrn_prebuilt_recipes_path"/$dir" || return 1
-    echo "conda build done."
+    echo "obtaining $dir as prebuilt package"
+    if [ ! -d $target_dir ]; then
+      echo "[$dir] missing for prebuilt package"
+      mkdir -p $target_dir || return
+      cd $target_dir || return
+      wget $url || return
+      # local path is now $target_dir/<tarball file>    # <---- weak
+      cd $icrn_base_working_dir || return
+    fi
   fi
 done
-conda search --override-channels -c $icrn_custom_channel_path
+
 echo "Done: retrieving remote resources."

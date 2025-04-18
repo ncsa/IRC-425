@@ -41,7 +41,9 @@ json_tags="$working_directory/recipe_tags.json"
 
 # create the subdirs, get the git repos, add them as submodules if needed, checkout branches
 for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
-  if [ "$dir" == "$jupyter_custom_kernel_name" ]; then continue; fi
+  if [ "$dir" == "$jupyter_custom_kernel_name" ]; then
+    continue
+  fi
   tag=$(jq -r ".\"$dir\".tag" $json_tags)
   url=$(jq -r ".\"$dir\".url" $json_tags)
   resourcePath=$(jq -r ".\"$dir\".resourcePath" $json_tags)
@@ -64,8 +66,7 @@ for dir in $(jq -r 'keys_unsorted[]' $json_tags); do
   fi
 done
 
-# probably need to sort out what the actual proper way to index a channel is. is this delta because of conda version on icrn?
 python -m conda_index $icrn_custom_channel_path
 #conda index $icrn_custom_channel_path
 conda search --override-channels -c $icrn_custom_channel_path
-echo "Done: retrieving remote resources."
+echo "######### Done: processing prebuilt packages"

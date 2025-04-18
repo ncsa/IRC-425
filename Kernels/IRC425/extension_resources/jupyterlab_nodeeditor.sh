@@ -26,6 +26,8 @@ cd $working_directory"/"$iam || return
 echo "current dir: ${PWD}"
 
 # Link your development version of the extension with JupyterLab
+echo "activating base environment to install into active jupyter instance"
+conda activate base
 echo $iam" extension: jupyter labextension develop . --overwrite"
 jupyter labextension develop . --overwrite
 # Server extension must be manually installed in develop mode

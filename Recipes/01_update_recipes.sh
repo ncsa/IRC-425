@@ -61,29 +61,40 @@ export icrn_custom_channel_path
 export icrn_environments_path
 
 # Prep local install environment
-if source $working_directory"/resources/prepare_install_environment.sh"; then
-  echo 'created install environment successfully.'
+echo '######### Preparing for custom package creation. ######### '
+if source $working_directory"/resources/01_prepare_install_environment.sh"; then
+  echo '######### created install environment successfully. ######### '
 else
-  echo "Couldn't create install environment."
+  echo "######### Couldn't create install environment. ######### "
   return 1
 fi
 
 # Pull kernel_resources from git
-if source $working_directory"/resources/pull_resources.sh"; then
-  echo 'obtained kernel_resources from git and/or remote sources.'
+echo '######### Obtaining remote resources for recipes. ######### '
+if source $working_directory"/resources/02_pull_resources.sh"; then
+  echo '######### obtained kernel_resources from git and/or remote sources. ######### '
 else
-  echo "Couldn't obtain resources."
+  echo "######### Couldn't obtain resources. ######### "
   return 1
 fi
 
 # Prebuilt packages: use grayskull to obtain recipes
-if source $working_directory"/resources/prebuilt_process.sh"; then
-  echo 'Launching prebuild package handler...'
+echo '######### Launching prebuild package handler... ######### '
+if source $working_directory"/resources/03_prebuilt_process.sh"; then
+  echo '######### Prebuilt packages signal successful build. ######### '
 else
-  echo "ERROR in prebuilt handling."
+  echo "######### ERROR in prebuilt handling. ######### "
   return 1
 fi
 
+echo '######### Launching custom recipe handler... ######### '
+# Custom Recipes: build into custom channel using conda-build
+if source $working_directory"/resources/04_custom_builds.sh"; then
+  echo '######### Custom package recipes signal successful build. ######### '
+else
+  echo "######### ERROR in custom recipe handling. ######### "
+  return 1
+fi
 
 #
 #if [ "$runtime_context" == "Prod" ]; then

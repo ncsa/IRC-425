@@ -1,48 +1,26 @@
 {
-  "czmq-feedstock": {
-    "tag": "none",
-    "url": "https://github.com/conda-forge/czmq-feedstock",
+  "ePhotosynthesis_C": {
+    "tag": "conda_recipe",
+    "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
     "resourcePath": "recipe/",
     "type": "recipe"
   },
-  "matplotlib-3.10.0": {
-    "tag": "v0.0.0",
-    "url": "https://files.pythonhosted.org/packages/68/dd/fa2e1a45fce2d09f4aea3cee169760e672c8262325aa5796c49d543dc7e6/matplotlib-3.10.0.tar.gz",
-    "resourcePath": "./Recipes/matplotlib-3.10.0/matplotlib-3.10.0.tar.gz",
-    "type": "package"
-  },
-  "matplotlib-3.9.4": {
-    "tag": "v0.0.0",
-    "url": "https://files.pythonhosted.org/packages/df/17/1747b4154034befd0ed33b52538f5eb7752d05bb51c5e2a31470c3bc7d52/matplotlib-3.9.4.tar.gz",
-    "resourcePath": "./Recipes/matplotlib-3.9.4/matplotlib-3.9.4.tar.gz",
-    "type": "package"
-  },
-  "ePhotosynthesis_C": {
-    "tag": "SoybeanParameterization",
-    "url": "https://github.com/cropsinsilico/ePhotosynthesis_C",
+  "ePhotosynthesis_C-test": {
+    "tag": "conda_recipe",
+    "url": "https://github.com/hdpriest-ui/ePhotosynthesis_C-test",
     "resourcePath": "recipe/",
-    "type": "recipe",
-    "install": "ePhotosynthesis.sh"
+    "type": "recipe"
   },
   "yggdrasil": {
-    "tag": "main",
-    "url": "https://github.com/cropsinsilico/yggdrasil",
-    "resourcePath": "recipe/",
-    "type": "recipe",
-    "install": "yggdrasil.sh"
+    "tag": "conda_recipe",
+    "url": "https://github.com/cropsinsilico/BML-yggdrasil",
+    "resourcePath": "recipes/",
+    "type": "recipe"
   },
-  "Soybean-BioCro": {
-    "tag": "main",
-    "url": "https://github.com/cropsinsilico/Soybean-BioCro",
-    "resourcePath": "recipe/",
-    "type": "recipe",
-    "install": "soybean-biocro.sh"
-  },
-  "jupyterlab_nodeeditor": {
-    "tag": "main",
-    "url": "https://github.com/cropsinsilico/jupyterlab_nodeeditor",
-    "resourcePath": "recipe/",
-    "type": "recipe",
-    "install": "jupyterlab_nodeeditor.sh"
+  "yggdrasil-test": {
+    "tag": "conda_recipe",
+    "url": "https://github.com/hdpriest-ui/BML-yggdrasil-test",
+    "resourcePath": "recipes/",
+    "type": "recipe"
   }
 }

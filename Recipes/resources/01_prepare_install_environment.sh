@@ -40,7 +40,7 @@ conda_install_env="IRC425_Installs"
 # create the subdirs, get the git repos, add them as submodules if needed, checkout branches
 conda config --add channels conda-forge
 
-if conda create -y -p ${icrn_environments_path}"/"${conda_install_env}
+if conda create --solver=libmamba -y -p ${icrn_environments_path}"/"${conda_install_env}
 then
   echo "created conda environment: "${icrn_environments_path}"/"${conda_install_env}
 else
@@ -58,6 +58,8 @@ else
 fi
 
 echo "Installing needed packages for compilation/download and parsing... "
-conda install -c conda-forge -y conda-build conda-verify git jq grayskull cmake make boost cxx-compiler
+conda_install_command="conda install --solver=libmamba -c conda-forge -y conda-build conda-verify git jq grayskull cmake make boost cxx-compiler"
+echo $conda_install_command
+conda install --solver=libmamba -c conda-forge -y conda-build conda-verify git jq grayskull cmake make boost cxx-compiler
 
 echo "Done preparing base install environment."
