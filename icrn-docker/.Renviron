@@ -1,0 +1,6 @@
+USER_ENV_VAR_one=/some/random/path:~{USER}/somEPath
+USER_SPECIAL_VAR_three="90.7KWMU"
+R_LIBS=/Oh/crap/theyre/usingit
+R_LIBS_USER=/users/special/library/directory
+# ICRN ADDITIONS - do not edit
+R_LIBS=/c/Users/hdpriest/.icrn/icrn_libraries/test2:${R_LIBS:-}
