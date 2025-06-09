@@ -1,0 +1,250 @@
+#!/bin/bash
+
+# This script is used to edit the .Renviron file to add the ICRN library path
+# It is used to add the ICRN library path to the .Renviron file
+
+# env vars assumed to exist:
+# ICRN_LIBRARY_REPOSITORY
+# ICRN_ENVIRONMENTS_BASE
+# ICRN_LIBRARY_BASE # user's location for the base of ICRN library structure
+# ex: ~{HOME}/.icrn/r_libraries/
+# ICRN_LIBRARY_BASE/library_catalogue.json
+# ICRN_LIBRARY_BASE/libraries/
+# ICRN_LIBRARY_BASE/libraries/<library_name> -> link-to-R-lib-loc-within-environment
+# environments:
+# ~{HOME}/.icrn/environments/<library_name>/etc/R/library
+
+icrn_base=".icrn_b"
+icrn_libs="icrn_libraries"
+
+ICRN_USER_BASE=${ICRN_USER_BASE:-${HOME}/${icrn_base}}
+ICRN_USER_LIBRARY_BASE=${ICRN_USER_LIBRARY_BASE:-${ICRN_USER_BASE}/${icrn_libs}}
+ICRN_USER_CATALOG=${ICRN_USER_CATALOG:-${ICRN_USER_LIBRARY_BASE}/user_catalog.json}
+ICRN_LIBRARY_REPOSITORY="/u/hdpriest/icrn_temp_repository"
+ICRN_LIBRARIES=${ICRN_LIBRARY_REPOSITORY}"/r_libraries/"
+ICRN_LIBRARY_CATALOG=${ICRN_LIBRARIES}"/icrn_catalogue.json"
+
+function libraries__available() # get a list of available libraries from the central repo
+{
+    echo "entered 'available' subcommand"
+    icrn_catalog=${ICRN_LIBRARY_CATALOG}
+    echo "Available libraries in ICRN catalog:"
+    libraries=$(jq -r '. | keys[]' $icrn_catalog)
+    echo -e "Library\tVersion"
+    for lib in $libraries; do
+        versions=$(jq -r ".$lib | keys[]" $icrn_catalog)
+        for version in $versions; do
+            echo -e $lib"\t"$version
+        done
+    done
+}
+
+function libraries__list() # get the list of libraries already checked out and ready for use
+{
+    echo "entered 'list' subcommand"
+    user_catalogue=${ICRN_USER_CATALOG}
+    echo "checked out libraries:"
+    libraries=$(jq -r '. | keys[]' $user_catalogue)
+    echo -e "Library\tVersion"
+    for lib in $libraries; do
+        versions=$(jq -r ".$lib | keys[]" $user_catalogue)
+        for version in $versions; do
+            echo -e $lib"\t"$version
+        done
+    done
+}
+
+function libraries__use() # use a library which is already checked out
+{
+    local targetname=$1; shift
+    local version=$1; shift
+
+    if [ -z $version ] || [ -z $targetname ]; then
+        echo "usage: icrn_manager libraries use <library name> <version number>"
+        help
+        exit 1
+    else
+        echo "Desired library:"
+        echo "Library: "$targetname
+        echo "Version: "$version
+    fi
+
+    icrn_catalog=${ICRN_LIBRARY_CATALOG}
+    user_catalogue=${ICRN_USER_CATALOG}
+    # add in checking for various needed entities
+    
+    absolute_path=$(jq -r ".\"$targetname\".\"$version\".\"absolute_path\"" $user_catalogue)
+    echo "checking for: "$absolute_path
+    echo "Activating..."
+    ./update_r_libs.sh ~/.Renviron $targetname
+    echo "Done."
+}
+
+function libraries__get() # get a library from the central repo
+{
+    local targetname=$1; shift
+    local version=$1; shift
+
+    if [ -z $version ] || [ -z $targetname ]; then
+        echo "usage: icrn_manager libraries get <library name> <version number>"
+        help
+        exit 1
+    else
+        echo "Desired library:"
+        echo "Library: "$targetname
+        echo "Version: "$version
+        
+    fi
+    icrn_catalog=${ICRN_LIBRARY_CATALOG}
+    user_catalog=${ICRN_USER_CATALOG}
+    echo ""
+    echo "ICRN Catalog:"
+    echo $icrn_catalog
+    echo "User Catalog:"
+    echo $user_catalog
+    echo ""
+    # jqstring=".$targetname.\"$version\".\"conda-pack\""
+    # todo:
+    # add test: is the targetname valid?
+    # add test: is the version number valid?
+
+    target_file=$(jq -r ".$targetname.\"$version\".\"conda-pack\"" $icrn_catalog)
+    if [ ! "$target_file" = "null" ]; then
+        pack_filepath=${ICRN_LIBRARIES}/$targetname/$version/$target_file
+        if [ -e $pack_filepath ]; then
+            target_unpacked=${ICRN_USER_LIBRARY_BASE}/$targetname-$version/
+            if [ ! -d $target_unpacked ]; then
+                echo "Making target directory: $target_unpacked"
+                mkdir -p $target_unpacked
+                echo "Checking out library..."
+                tar -xzf $pack_filepath -C $target_unpacked
+            else
+                echo "WARNING: target directory: $target_unpacked already exists!"
+            fi
+        else
+            echo "ERROR: could not find target pack file: $pack_filepath"
+        fi
+    else
+        echo "ERROR: could not find target library to get"
+    fi
+    # activate conda env
+    # unpack conda env
+    echo checking for: $target_unpacked"/bin/activate"
+    if [ -e $target_unpacked"bin/activate" ]; then
+        echo "activating environment"
+        source $target_unpacked"bin/activate"
+        echo "doing unpack"
+        conda-unpack
+        # WARNING: this is weak - relies on preparer and environment ensuring this is top slot
+        echo "getting R path."
+        target_library_path=$(Rscript -e 'cat(.libPaths()[1])')
+        echo "determined: $target_library_path"
+        echo "deactivating"
+        source $target_unpacked"/bin/deactivate"
+        echo "updating environment"
+        ln -s $target_unpacked ${ICRN_USER_LIBRARY_BASE}/$targetname 
+    
+        echo "Updating user's catalog with $targetname and $version"
+        user_catalog_tmp=$(mktemp)
+        jq -r ".\"$targetname\".\"$version\"={\"absolute_path\":\"$target_library_path\"} " "$user_catalog" > "$user_catalog_tmp" && mv "$user_catalog_tmp" "$user_catalog"
+        # Add in a conda freeze ability to populate "manifest":[] with list of packages within lib
+        # or maybe a R-namespace function via Rscript (like above) to get the R-packages, since this is currently an R package manager
+
+        # yeah we actually shouldn't do this yet - maybe just get the thing, don't activate it
+        ./update_r_libs.sh ~/.Renviron $targetname
+        echo "Done."
+    fi
+}
+
+function libraries__update() # update users copy of a library from central repo
+{
+    echo "entered 'update' subcommand"
+    # get version from user's catalogue
+    # compare version with central catalogue
+    # if central > user
+    # remove user
+    # get central
+}
+
+function libraries__remove() # remove a users copy of a library
+{
+    echo "entered 'remove' subcommand"
+    # check for existence of library in user catalogue
+    # 
+}
+
+function libraries__init() # create base resources
+{
+    echo "Initializing icrn library resources..."
+    # check for existence of 
+    #~{HOME}/.icrn/
+    #~{HOME}/.icrn/icrn_libraries/
+    #~{HOME}/.icrn/user_catalogue.json
+    if [ ! -e ${ICRN_BASE}/ ]; then
+        echo creating ${ICRN_BASE}/
+        mkdir -p ${ICRN_BASE}
+    else
+        echo base icrn directory exists at ${ICRN_BASE}/
+    fi
+    if [ ! -e ${ICRN_LIBRARY_BASE} ]; then
+        echo creating ${ICRN_LIBRARY_BASE}
+        mkdir -p ${ICRN_LIBRARY_BASE}
+    else
+        echo base icrn library exists at ${ICRN_LIBRARY_BASE}
+    fi
+    if [ ! -e ${ICRN_USER_CATALOG} ]; then
+        echo creating ${ICRN_USER_CATALOG}
+        echo "{}" > ${ICRN_USER_CATALOG}
+    else
+        echo base icrn user catalogue exists at ${ICRN_USER_CATALOG}
+    fi
+
+}
+
+function libraries() # launcher
+{
+    local cmdname=$1; shift
+    if [ $cmdname = "avail" ]; then
+        "libraries__available" "$@"
+    elif [ ! -z "$(grep 'function libraries__'${cmdname} $0)" ]; then
+        "libraries__$cmdname" "$@"
+    else
+        echo ""
+        echo Error: $cmdname is not a valid subfunction name.
+        echo ""
+        help
+    fi
+
+}
+
+function help() # Show a list of functions
+{
+    grep "^function" $0
+    echo ""
+    echo "usage: $0 libraries <subcommand>"
+    echo "    init"
+    echo "    update"
+    echo "    list"
+    echo "    available"
+    echo "    get <library> <version>"
+    echo "    remove"
+    echo "    use <library> <version>"
+    exit 1
+}
+
+
+# [[ $_ != $0 ]] && return
+
+# check for existence of needed tools
+if [ -z jq ]; then
+    echo "Need tool jq installed to proceed."
+    exit 1
+fi
+
+# check for valid function
+if declare -f "$1" >/dev/null 2>&1; then
+  "$@" 
+else
+  echo "Function $1 not recognized" >&2
+  help
+fi

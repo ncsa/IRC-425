@@ -1,0 +1,20 @@
+{
+    "library01": {
+        "1.0": {
+            "relative_path": "etc/R/library/",    
+            "manifest":[
+                "package01",
+                "package02"
+            ]
+        }
+    },
+    "library02": {
+        "1.0":{
+            "relative_path": "etc/R/library/", 
+            "manifest":[
+                "package01",
+                "package02"
+            ]
+        }
+    }
+}

@@ -15,15 +15,22 @@ if [ -z "$target_Renviron_file" ]; then
 fi
 
 # for dev: set the ICRN library base path; this should be done inside of the dockerfile in prod
-export ICRN_LIBRARY_BASE=${HOME}/.icrn/icrn_libraries
-
+# export ICRN_LIBRARY_BASE=${HOME}/.icrn/icrn_libraries
+icrn_base=".icrn_b"
+icrn_libs="icrn_libraries"
+ICRN_BASE=${ICRN_BASE:-${HOME}/${icrn_base}}
+ICRN_LIBRARY_BASE=${ICRN_LIBRARY_BASE:-${ICRN_BASE}/${icrn_libs}}
+ICRN_USER_CATALOG=${ICRN_USER_CATALOG:-${ICRN_LIBRARY_BASE}/user_catalog.json}
+ICRN_LIBRARY_REPOSITORY="/u/hdpriest/icrn_temp_repository"
+ICRN_LIBRARIES=${ICRN_LIBRARY_REPOSITORY}"/r_libraries/"
+ICRN_LIBRARY_CATALOG=${ICRN_LIBRARIES}"/icrn_catalogue.json"
 
 update_r_libs_path()
 {
     target_r_environ_file=$1
     icrn_library_name=$2
     ICRN_library_path=${ICRN_LIBRARY_BASE}/${icrn_library_name}
-    echo "# ICRN ADDITIONS - do not edit" >> $target_r_environ_file
+    echo "# ICRN ADDITIONS - do not edit this line or below" >> $target_r_environ_file
     if [ -z "$icrn_library_name" ]; then
         echo "R_LIBS="'${R_LIBS:-}' >> $target_r_environ_file
     else
@@ -33,8 +40,8 @@ update_r_libs_path()
 
 if [ ! -z $target_Renviron_file ]; then
     if [ -e $target_Renviron_file ]; then
-        if [ ! -z "$(grep "# ICRN ADDITIONS - do not edit" $target_Renviron_file)" ]; then
-            sed -i '/^# ICRN ADDITIONS - do not edit$/,$d' $target_Renviron_file 
+        if [ ! -z "$(grep "# ICRN ADDITIONS - do not edit this line or below" $target_Renviron_file)" ]; then
+            sed -i '/^# ICRN ADDITIONS - do not edit this line or below$/,$d' $target_Renviron_file 
         fi
     fi
     update_r_libs_path $target_Renviron_file $target_library_name
